@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>The Web Gallery</title>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+    <link href="style/login.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+    <header>
+        <a href="/" id="title">The Web Gallery</a>
+    </header>
+
+    <div id="error-container">
+        <p><span id="error-message">Image does not exist.</span></p>
+        <button id="hide-error-btn" type="button" class="btn" title="Dismiss error">Dismiss error</button>
+    </div>
+
+    <div id="login-container" class="entry-container">
+        <div id="login-container-label" class="container-header" title="Log in">
+            <h1 class="header-text tab">Log in</h1>
+        </div>
+        <form id="login-form">
+            <div class="form-element">
+                <input id="input-login-username" type="text" placeholder="Username" name="Username" required/>
+            </div>
+            <div class="form-element">
+                <input id="input-login-password" type="password" placeholder="Password" name="Password" required/>
+            </div>
+            <input type="submit" id="submit-login-btn" class="btn center-btn" value="Submit"/>
+            <div id="goto-signup-btn" class="btn small-btn">Click here to create a new account.</div>
+        </form>
+    </div>
+
+    <div id="signup-container" class="entry-container">
+        <div id="signup-container-label" class="container-header" title="Sign up">
+            <h1 class="header-text tab">Sign up</h1>
+        </div>
+        <form id="signup-form">
+            <div class="form-element">
+                <input id="input-signup-username" type="text" placeholder="Username" name="Username" required/>
+            </div>
+            <div class="form-element">
+                <input id="input-signup-password" type="password" placeholder="Password" name="Password" required/>
+            </div>
+            <input type="submit" id="submit-signup-btn" class="btn center-btn" value="Submit"/>
+            <div id="goto-login-btn" class="btn small-btn">Already have an account? Click here to log in.</div>
+        </form>
+    </div>
+
+    <footer>
+        <a href='/credits.html'>Credits</a>
+    </footer>
+    <script src="js/login.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>

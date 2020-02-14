@@ -3,77 +3,100 @@
 <head>
     <meta charset="utf-8"/>
     <title>The Web Gallery</title>
-    <link href="style/master.css" rel="stylesheet" type="text/css"/>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+    <link href="style/gallery.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
     <header>
         <a href="/" id="title">The Web Gallery</a>
+        <button id="logout-btn" type="button" class="btn small-btn right-btn" title="Log Out">Log Out</button>
+        <a href='/login.html' id="login-btn" class="btn small-btn right-btn" title="Log In" tabindex="0">Log In</a>
+        <p id="logged-in-as">Currently logged in as: <span id="current-user">tunadragon</span></p>
     </header>
 
     <div id="error-container">
-        <p><span id="error-status">[404 Error]</span> <span id="error-message">Image does not exist.</span></p>
+        <p><span id="error-message">Image does not exist.</span></p>
         <button id="hide-error-btn" type="button" class="btn" title="Dismiss error">Dismiss error</button>
     </div>
 
-    <div id="add-image-container" class="main-container">
-        <div id="toggle-add-image-btn" class="btn container-header" title="Click to show/hide form" tabindex="0">
-            <h1 class="header-text">Add an Image</h1>
+    <div id="galleries">
+        <h1>Galleries</h1>
+        <div id="gallery-list">
+            <div id="sample-gallery-item" class="gallery-item btn" tabindex="0">
+                <h3>Username's Gallery</h3>
+                <p>Last updated: Mon Feb 5, 2002</p>
+            </div>
+
+            <div id="sample-gallery-item2" class="gallery-item btn" tabindex="0">
+                <h3>Username's Gallery</h3>
+                <p>Last updated: Mon Feb 5, 2002</p>
+            </div>
         </div>
-        <form id="add-image-form">
-            <div class="form-element">
-                <input id="input-image-title" type="text" placeholder="Enter image title" name="title" required/>
-            </div>
-            <div class="form-element">
-                <input id="input-image-author" type="text" placeholder="Enter author name" name="author" required/>
-            </div>
-            <div class="form-element">
-                <input id="input-image-file" type="file" placeholder="Open image file" name="picture" accept="image/*" required/>
-            </div>
-            <input type="submit" id="post-image-btn" class="btn large-btn" value="Post image"/>
-        </form>
+        <div id="newer-older-galleries" class="multi-buttons">
+            <button id="newer-galleries-btn" type="button" class="btn small-btn" title="Newer galleries">Newer galleries</button>
+            <button id="older-galleries-btn" type="button" class="btn small-btn" title="Older galleries">Older galleries</button>
+        </div>
     </div>
 
-    <div id="image-container" class="main-container hidden">
-        <div class="container-header">
-            <div id="image-info">
-                <h1 id="image-title" class="header-text">Image Title</h1>
-                <h1 class="header-text-small">by <span id="image-author">Author</span></h1>
-                <h1 class="header-text-small" id="image-date">Date posted</h1>
+    <div id="gallery">
+        <div id="add-image-container" class="main-container">
+            <div id="toggle-add-image-btn" class="btn container-header" title="Click to show/hide form" tabindex="0">
+                <h1 class="header-text">Add an Image</h1>
             </div>
-            <span id="delete-image-btn" class="icon btn" title="Delete current image" tabindex="0"></span>
+            <form id="add-image-form">
+                <div class="form-element">
+                    <input id="input-image-title" type="text" placeholder="Enter image title" name="title" required/>
+                </div>
+                <div class="form-element">
+                    <input id="input-image-author" type="text" placeholder="Enter author name" name="author" required/>
+                </div>
+                <div class="form-element">
+                    <input id="input-image-file" type="file" placeholder="Open image file" name="picture" accept="image/*" required/>
+                </div>
+                <input type="submit" id="post-image-btn" class="btn large-btn" value="Post image"/>
+            </form>
         </div>
+        <div id="image-container" class="main-container hidden">
+            <div class="container-header">
+                <div id="image-info">
+                    <h1 id="image-title" class="header-text">Image Title</h1>
+                    <h1 class="header-text-small">by <span id="image-author">Author</span></h1>
+                    <h1 class="header-text-small" id="image-date">Date posted</h1>
+                </div>
+                <span id="delete-image-btn" class="icon btn" title="Delete current image" tabindex="0"></span>
+            </div>
 
-        <div id="current-image">
+            <div id="current-image">
+            </div>
+
+            <div id="prev-next-btns" class="multi-buttons">
+                <span id="prev-image-btn" class="icon btn" title="Previous image" tabindex="0"></span>
+                <span id="next-image-btn" class="icon btn" title="Next image" tabindex="0"></span>
+            </div>
+
+            <form id="add-comment-form">
+                <div class="form-element">
+                    <input id="input-comment-author" type="text" placeholder="Enter your name" name="input-comment-author" required/>
+                </div>
+                <div class="form-element">
+                    <textarea id="input-comment-text" placeholder="Write a comment" name="input-comment-text" rows="4" required></textarea>
+                </div>
+                <input type="submit" id="post-comment-btn" class="btn large-btn" value="Post comment"/>
+            </form>
+
+            <div id="comment-display">
+                <h3>Comments</h3>
+                <div id="comment-list">
+
+                </div>
+
+                <div id="newer-older-comments" class="multi-buttons">
+                    <button id="newer-comments-btn" type="button" class="btn small-btn" title="Newer comments">Newer comments</button>
+                    <button id="older-comments-btn" type="button" class="btn small-btn" title="Older comments">Older comments</button>
+                </div>
+            </div>
         </div>
-
-        <div id="prev-next-btns" class="multi-buttons">
-            <span id="prev-image-btn" class="icon btn" title="Previous image" tabindex="0"></span>
-            <span id="next-image-btn" class="icon btn" title="Next image" tabindex="0"></span>
-        </div>
-
-        <form id="add-comment-form">
-            <div class="form-element">
-                <input id="input-comment-author" type="text" placeholder="Enter your name" name="input-comment-author" required/>
-            </div>
-            <div class="form-element">
-                <textarea id="input-comment-text" placeholder="Write a comment" name="input-comment-text" rows="4" required></textarea>
-            </div>
-            <input type="submit" id="post-comment-btn" class="btn large-btn" value="Post comment"/>
-        </form>
-
-        <div id="comment-display">
-            <h3>Comments</h3>
-            <div id="comment-list">
-
-            </div>
-
-            <div id="newer-older-comments" class="multi-buttons">
-                <button id="older-comments-btn" type="button" class="btn small-btn" title="Newer comments">Newer Comments</button>
-                <button id="newer-comments-btn" type="button" class="btn small-btn" title="Older comments">Older Comments</button>
-            </div>
-        </div>
-
     </div>
 
     <footer>

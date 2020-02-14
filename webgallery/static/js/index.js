@@ -13,11 +13,8 @@
         api.onError(function(err){
             // show error message in console
             console.error('[error]'+ err);
-            let status = parseInt(err.substring(1,4));
-            let msg = JSON.parse(err.substring(5)).message;
             // show error message through DOM
-            document.getElementById('error-status').innerText = '[' + status + ' Error]';
-            document.getElementById('error-message').innerText = msg;
+            document.getElementById('error-message').innerText = err;
             document.getElementById('error-container').style.display = 'block';
         });
 
@@ -91,10 +88,10 @@
 
         // Browsing comments
         document.querySelector('#older-comments-btn').addEventListener('click', function(e){
-            changeCommentPage(-1);
+            changeCommentPage(1);
         });
         document.querySelector('#newer-comments-btn').addEventListener('click', function(e){
-            changeCommentPage(1);
+            changeCommentPage(-1);
         });
 
         // button to dismiss error message

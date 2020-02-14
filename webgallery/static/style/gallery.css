@@ -1,0 +1,144 @@
+#image-info {
+    word-break: break-all;
+    width: 90%;
+}
+
+/* BUTTONS */
+#toggle-add-image-btn:hover {
+    background: #0eb395;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom;
+    margin: 5px;
+}
+
+#prev-image-btn {
+    background-image: url("../media/arrow.png");
+    transform: rotate(180deg);
+}
+
+#next-image-btn {
+    background-image: url("../media/arrow.png");
+}
+
+#delete-image-btn {
+    background-image: url("../media/delete.png");
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.delete-comment {
+    width: 24px;
+    height: 24px;
+    background-image: url("../media/delete2.png");
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+
+/* IMAGE STYLING */
+#image-container.hidden {
+    display: none;
+}
+
+#current-image {
+    background: #000;
+}
+
+#current-image img {
+    width: 100%;
+    align-self: center;
+    object-fit: contain;
+}
+
+#image-author {
+    font-weight: bold;
+}
+
+#prev-next-btns {
+    background: #000;
+}
+
+.multi-buttons {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    justify-content: center;
+}
+
+
+/* COMMENT SECTION */
+#add-comment-form {
+    border-top: 2px #222 solid;
+    border-bottom: 2px #222 solid;
+    padding: 10px 0px;
+    margin-bottom: 10px;
+}
+
+#comment-display h3 {
+    margin: 10px;
+}
+
+#comment-list {
+    border-top: 2px #D9D9D9 solid;
+}
+
+.comment {
+    padding: 10px 15px 20px 15px;
+    border-bottom: 2px #D9D9D9 solid;
+    position: relative;
+    word-break: break-all;
+}
+
+.comment-content {
+    padding: 4px;
+}
+
+.comment-header p {
+    width: 90%;
+    margin-top:0;
+}
+
+.comment-author {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.comment-date {
+    color: #999;
+    white-space: pre;
+    line-height: 30px;
+}
+
+.comment-text {
+    margin:0;
+}
+
+#galleries h1 {
+    color: #fff;
+}
+
+.gallery-item {
+    color: #000;
+    background: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    border: #fff solid 4px;
+    margin-bottom: 10px;
+}
+
+.gallery-item:hover {
+    border-color: #0eb395;
+}
+
+.gallery-item h3, .gallery-item p {
+    margin: 0;
+}

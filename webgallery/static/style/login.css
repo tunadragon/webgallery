@@ -1,0 +1,37 @@
+.entry-container {
+    background: #fff;
+    border: none;
+    border-radius: 10px;
+    /* margin: 10px 10% 20px 10%; */
+    margin: 10px 0 20px 0;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+}
+
+.center-btn {
+    background: #2B67C2;
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    align-self: center;
+    padding: 10px;
+    width: 150px;
+    margin: 10px;
+}
+
+.center-btn:hover {
+    background: #347dec;
+}
+
+.input-label {
+    position: absolute;
+    top: -22px;
+    left: 7px;
+    font-weight: bold;
+    background: #fff;
+}
+
+#goto-signup-btn, #goto-login-btn {
+    margin:0;
+}
