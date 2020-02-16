@@ -23,15 +23,7 @@
     <div id="galleries">
         <h1>Galleries</h1>
         <div id="gallery-list">
-            <div id="sample-gallery-item" class="gallery-item btn" tabindex="0">
-                <h3>Username's Gallery</h3>
-                <p>Last updated: Mon Feb 5, 2002</p>
-            </div>
 
-            <div id="sample-gallery-item2" class="gallery-item btn" tabindex="0">
-                <h3>Username's Gallery</h3>
-                <p>Last updated: Mon Feb 5, 2002</p>
-            </div>
         </div>
         <div id="newer-older-galleries" class="multi-buttons">
             <button id="newer-galleries-btn" type="button" class="btn small-btn" title="Newer galleries">Newer galleries</button>
@@ -40,6 +32,7 @@
     </div>
 
     <div id="gallery">
+        <h2 id="gallery-name"></h2>
         <div id="add-image-container" class="main-container">
             <div id="toggle-add-image-btn" class="btn container-header" title="Click to show/hide form" tabindex="0">
                 <h1 class="header-text">Add an Image</h1>
@@ -47,9 +40,6 @@
             <form id="add-image-form">
                 <div class="form-element">
                     <input id="input-image-title" type="text" placeholder="Enter image title" name="title" required/>
-                </div>
-                <div class="form-element">
-                    <input id="input-image-author" type="text" placeholder="Enter author name" name="author" required/>
                 </div>
                 <div class="form-element">
                     <input id="input-image-file" type="file" placeholder="Open image file" name="picture" accept="image/*" required/>
@@ -76,9 +66,6 @@
             </div>
 
             <form id="add-comment-form">
-                <div class="form-element">
-                    <input id="input-comment-author" type="text" placeholder="Enter your name" name="input-comment-author" required/>
-                </div>
                 <div class="form-element">
                     <textarea id="input-comment-text" placeholder="Write a comment" name="input-comment-text" rows="4" required></textarea>
                 </div>

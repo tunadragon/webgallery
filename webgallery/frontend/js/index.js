@@ -3,12 +3,9 @@
     "use strict";
 
     window.onload = function(){
-        let currImage = null;
-        let currImageIndex = -1;
-        let allImages = [];
-
-        let currCommentPage = 0;
-        let numComments = 0;
+        let currPage = 0; // curr page when browsing galleries
+        let numUsers = 0;
+        let currUser = null;
 
         api.onError(function(err){
             // show error message in console
@@ -18,21 +15,102 @@
             document.getElementById('error-container').style.display = 'block';
         });
 
+        // button to dismiss error message
+        document.getElementById('hide-error-btn').addEventListener('click', function(e){
+            document.getElementById('error-container').style.display = 'none';
+        });
+
+        api.onUserUpdate(function(username, users, page){
+            // show/hide login/logout buttons
+            currUser = username;
+            document.querySelector("#login-btn").style.display = (username)? 'none' : 'block';
+            document.querySelector("#logout-btn").style.display = (username)? 'block' : 'none';
+            document.querySelector("#logged-in-as").style.display = (username)? 'block' : 'none';
+            document.querySelector("#current-user").innerText = username;
+
+            if (page == null) { // given all users
+                numUsers = users.length;
+                api.getUsernamePage(currPage);
+            } else reloadUsers(users); // given specific page of users
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', function(){
+            api.signout();
+            window.location.href = '/login.html';
+        });
+
+        // Browsing user galleries
+        document.querySelector('#older-galleries-btn').addEventListener('click', function(e){
+            changePage(1);
+        });
+        document.querySelector('#newer-galleries-btn').addEventListener('click', function(e){
+            changePage(-1);
+        });
+
+        function changePage(offset) {
+            let maxPages = Math.ceil(numUsers/10)-1;
+            let newPage = currPage + offset;
+            if (0 <= newPage && newPage <= maxPages) {
+                // change the current page
+                currPage = newPage;
+                api.getUsernamePage(newPage);
+            }
+        }
+
+        function reloadUsers(users) {
+            document.querySelector('#gallery-list').innerHTML = '';
+            users.forEach(function(user){
+                let elmt = document.createElement('div');
+                elmt.className = 'gallery-item btn';
+                elmt.setAttribute('tabindex', '0');
+                let date = new Date(user.createdAt).toGMTString();
+                elmt.innerHTML = `
+                    <h3>${user._id}'s Gallery</h3>
+                    <p>Created: ${date}</p>
+                `;
+                elmt.addEventListener('click', function(e){
+                    api.getUserGallery(user._id);
+                });
+                document.querySelector('#gallery-list').append(elmt);
+            });
+        }
+
+        /******************** FUNCTIONS FOR VIEWING GALLERY ********************/
+        let currImage = null;
+        let currImageIndex = -1;
+        let allImages = [];
+
+        let currCommentPage = 0;
+        let numComments = 0;
+
         // When an image is added or deleted from the gallery
-        api.onImageUpdate(function(images){
-            allImages = images;
-            let imgDisplay = document.querySelector('#image-container');
-            // if gallery is empty, hide image display
-            if (images.length == 0) imgDisplay.style.display = 'none';
-            else {
-                if (currImageIndex == -1) currImageIndex = images.length-1; // if first image
-                // check if index is out of bounds and fix it if so
-                while(!images[currImageIndex] && currImageIndex >= -1){
-                    currImageIndex -= 1;
-                    currCommentPage = 0;
+        api.onImageUpdate(function(username, images){
+            if (username && images) {
+                document.getElementById('galleries').style.display = 'none';
+                document.getElementById('gallery').style.display = 'block';
+                if (currUser == username) {
+                    document.getElementById('add-image-container').style.display = 'block';
                 }
-                currImage = images[currImageIndex];
-                reloadImage();
+
+                allImages = images;
+                let imgDisplay = document.getElementById('image-container');
+                // if gallery is empty, hide image display
+                if (images.length == 0) imgDisplay.style.display = 'none';
+                else {
+                    if (currImageIndex == -1) currImageIndex = images.length-1; // if first image
+                    // check if index is out of bounds and fix it if so
+                    while(!images[currImageIndex] && currImageIndex >= -1){
+                        currImageIndex -= 1;
+                        currCommentPage = 0;
+                    }
+                    currImage = images[currImageIndex];
+                    reloadImage();
+                }
+            }
+            if (images.length == 0) {
+                document.getElementById('gallery-name').innerText = username+"'s gallery is empty.";
+            } else {
+                document.getElementById('gallery-name').innerText = username+"'s gallery";
             }
         });
 
@@ -57,9 +135,8 @@
         document.getElementById('add-image-form').addEventListener('submit', function(e){
             e.preventDefault();
             let title = document.querySelector('#input-image-title').value;
-            let author = document.querySelector('#input-image-author').value;
             let file = document.querySelector('#input-image-file').files[0];
-            api.addImage(title, author, file);
+            api.addImage(title, file);
             currImageIndex = allImages.length; // update current image to be new image
             document.getElementById('add-image-form').reset(); // clear form
         });
@@ -80,9 +157,8 @@
         // Submitting Add-comment form
         document.getElementById('add-comment-form').addEventListener('submit', function(e){
             e.preventDefault();
-            let author = document.getElementById('input-comment-author').value;
             let text = document.getElementById('input-comment-text').value;
-            api.addComment(currImage._id, author, text);
+            api.addComment(currImage._id, text);
             document.getElementById('add-comment-form').reset(); // clear form
         });
 

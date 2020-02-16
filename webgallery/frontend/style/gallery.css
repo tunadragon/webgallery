@@ -3,6 +3,10 @@
     width: 90%;
 }
 
+#add-image-container{
+    display: none;
+}
+
 /* BUTTONS */
 #toggle-add-image-btn:hover {
     background: #0eb395;
@@ -122,6 +126,16 @@
     margin:0;
 }
 
+#gallery{
+    display: none;
+    min-height: 500px;
+}
+
+#gallery-name{
+    color:#fff;
+    word-break: break-all;
+}
+
 #galleries h1 {
     color: #fff;
 }
@@ -141,4 +155,6 @@
 
 .gallery-item h3, .gallery-item p {
     margin: 0;
+    margin-top:5px;
+    word-break: break-all;
 }

@@ -35,10 +35,12 @@ footer a {
     color: #fff;
     margin-top: 10px;
     font-weight: normal;
+    display: none;
 }
 
 #current-user {
     font-weight: bold;
+    word-break: break-all;
 }
 
 .main-container {
@@ -112,6 +114,10 @@ footer a {
 
 .right-btn {
     float: right;
+}
+
+#login-btn, #logout-btn {
+    display: none;
 }
 
 /* FORM STYLING */
