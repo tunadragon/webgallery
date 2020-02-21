@@ -27,6 +27,8 @@
             document.querySelector("#logout-btn").style.display = (username)? 'block' : 'none';
             document.querySelector("#logged-in-as").style.display = (username)? 'block' : 'none';
             document.querySelector("#current-user").innerText = username;
+            document.querySelector("#please-login").style.display = (username)? 'none' : 'block';
+            document.querySelector("#galleries").style.display = (username)? 'block' : 'none';
 
             if (page == null) { // given all users
                 numUsers = users.length;
@@ -220,6 +222,8 @@
             // show/hide the prev/next-image buttons
             document.querySelector('#prev-image-btn').style.visibility = !allImages[currImageIndex-1] ? 'hidden' : '';
             document.querySelector('#next-image-btn').style.visibility = !allImages[currImageIndex+1] ? 'hidden' : '';
+            // hide delete button if current user is not the author
+            document.getElementById('delete-image-btn').style.visibility = (currUser != author) ? 'hidden' : '';
 
             api.getCommentPage(currImage._id, null);
             api.getCommentPage(currImage._id, currCommentPage); // load comments
@@ -253,6 +257,10 @@
                 elmt.querySelector('.delete-comment').addEventListener('click', function(e) {
                     api.deleteComment(id);
                 });
+                // hide delete button if current user is not the author
+                if (currUser !== author) {
+                    elmt.querySelector('.icon.delete-comment').style.visibility = 'hidden';
+                }
                 // add this element to the document
                 document.querySelector('#comment-list').append(elmt);
             });
